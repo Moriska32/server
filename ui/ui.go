@@ -40,7 +40,7 @@ const indexHTML = `
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Simple Go Web App</title>
+    <title>Test</title>
   </head>
   <body>
     <div id='root'></div>
