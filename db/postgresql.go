@@ -41,7 +41,7 @@ type pgDb struct {
 func (p *pgDb) createTablesIfNotExist() error {
 	create_sql := `
 
-       CREATE TABLE IF NOT EXISTS people (
+       CREATE TABLE IF NOT EXISTS test.people (
        id SERIAL NOT NULL PRIMARY KEY,
        first TEXT NOT NULL,
        last TEXT NOT NULL);
@@ -58,18 +58,18 @@ func (p *pgDb) createTablesIfNotExist() error {
 func (p *pgDb) prepareSqlStatements() (err error) {
 
 	if p.sqlSelectPeople, err = p.dbConn.Preparex(
-		"SELECT id, first, last FROM people",
+		"SELECT id, first, last FROM test.people",
 	); err != nil {
 		return err
 	}
 	if p.sqlInsertPerson, err = p.dbConn.PrepareNamed(
-		"INSERT INTO people (first, last) VALUES (:first, :last) " +
+		"INSERT INTO test.people (first, last) VALUES (:first, :last) " +
 			"RETURNING id, first, last",
 	); err != nil {
 		return err
 	}
 	if p.sqlSelectPerson, err = p.dbConn.Prepare(
-		"SELECT id, first, last FROM people WHERE id = $1",
+		"SELECT id, first, last FROM test.people WHERE id = $1",
 	); err != nil {
 		return err
 	}
